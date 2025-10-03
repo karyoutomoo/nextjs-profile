@@ -65,36 +65,25 @@ export const skills: Skill[] = [
 export const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "Portfolio Website",
     description:
-      "Full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "Docker"],
-    githubUrl: "https://github.com/example/ecommerce",
+      "Personal portfolio website to showcase projects, skills, and experience. Built with React and Tailwind CSS.",
+    technologies: ["React", "PostgreSQL", "Tailwind"],
+    githubUrl: "https://github.com/karyoutomoo/nextjs-profile",
     liveUrl: "https://ecommerce-demo.com",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop",
+    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=870&auto=format&fit=crop",
   },
   {
     id: 2,
     title: "Task Management App",
     description:
       "Collaborative project management tool with real-time updates, file sharing, and team communication features.",
-    technologies: ["Next.js", "TypeScript", "Prisma", "Socket.io", "Tailwind"],
-    githubUrl: "https://github.com/example/task-manager",
+    technologies: ["Spring Boot", "PostgreSQL", "Thymeleaf"],
+    githubUrl: "https://github.com/karyoutomoo/task-manager",
     liveUrl: "https://taskmanager-demo.com",
     image:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Weather Analytics Dashboard",
-    description:
-      "Data visualization dashboard for weather patterns with predictive analytics and interactive charts.",
-    technologies: ["Vue.js", "Python", "FastAPI", "D3.js", "AWS"],
-    githubUrl: "https://github.com/example/weather-dashboard",
-    image:
-      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=200&fit=crop",
-  },
+  }
 ];
 
 export const experience: Experience[] = [
