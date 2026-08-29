@@ -1,8 +1,9 @@
 import { Code, Database, Github, Mail, Linkedin, Server, Lamp } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import { Project, Experience, Skill } from "./portfolio.types";
 
-export const socialLinks: { name: string; url: string; icon: any }[] = [
+export const socialLinks: { name: string; url: string; icon: LucideIcon }[] = [
   {
     name: "Mail",
     url: "mailto:karyoutomoo@gmail.com",
@@ -89,9 +90,24 @@ export const projects: Project[] = [
 export const experience: Experience[] = [
   {
     id: 1,
+    company: "Sociolla",
+    position: "Full Stack Software Engineer (SDE III)",
+    duration: "2026 - Present",
+    description:
+      "Senior contributor on non-commerce products and internal tooling: a social networking app and a product review platform serving Sociolla's beauty community. Build event-driven microservices backed by RabbitMQ and MongoDB, ship the cross-platform React Native client end to end, and review peers' designs and code.",
+    technologies: [
+      "React Native",
+      "Express JS",
+      "Rabbit Message Queue",
+      "Mongoose",
+      "TypeScript",
+    ],
+  },
+  {
+    id: 2,
     company: "Jenius SMBCI (Formerly BTPN)",
     position: "Full Stack Software Engineer",
-    duration: "2019 - Present",
+    duration: "2019 - 2026",
     description:
       "Develop and maintain customer-facing applications serving 10M+ users. Built scalable services to automate tasks and improve performance.",
     technologies: [
@@ -104,7 +120,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     company: "AkuPintar App",
     position: "Mobile Developer",
     duration: "2019",
@@ -113,7 +129,7 @@ export const experience: Experience[] = [
     technologies: ["Java Android", "Swift iOS"],
   },
   {
-    id: 3,
+    id: 4,
     company: "Blibli.com",
     position: "Intern Backend Developer",
     duration: "2018",
@@ -123,7 +139,7 @@ export const experience: Experience[] = [
   },
 ];
 
-export const aboutMe: String = `I\'m an experienced full stack developer who thrives on creating innovative solutions to complex problems. 
+export const aboutMe: string = `I\'m an experienced full stack developer who thrives on creating innovative solutions to complex problems. 
   With over 5 years in the industry, I\'ve had the privilege of working with startups and established companies, 
   helping them build scalable applications across the stack that serve millions of users.\n\nThis full stack perspective allows me to design efficient data flows, optimize performance across the
   entire application stack, and implement scalable solutions that grow with business needs. My

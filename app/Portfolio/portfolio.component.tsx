@@ -5,11 +5,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import {
   Github,
-  Linkedin,
-  Mail,
   ExternalLink,
   MapPin,
   Calendar,
+  Globe,
 } from "lucide-react";
 
 import assets from "../../assets";
@@ -23,12 +22,12 @@ import { SetActiveTab, Tabs } from "./portfolio.types";
 const _renderHeaderSection = () => {
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-400/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent"></div>
       <div className="relative max-w-6xl mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Profile Image */}
           <div className="relative">
-            <div className="w-48 h-48 rounded-full overflow-hidden ring-4 ring-purple-400/50 shadow-2xl">
+            <div className="w-48 h-48 rounded-full overflow-hidden ring-1 ring-zinc-500/40 shadow-2xl">
               <Image
                 src={assets.profile}
                 alt="Profile Photo"
@@ -42,24 +41,28 @@ const _renderHeaderSection = () => {
           {/* Profile Info */}
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-5xl font-bold text-white mb-4">FAIQ</h1>
-            <h2 className="text-2xl text-purple-300 mb-6">
+            <h2 className="text-2xl text-zinc-400 mb-6">
               Full Stack Software Developer
             </h2>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              A proficient software engineer with 5+ years of experience
-              building scalable applications across the stack in finance
-              industry.
+              Full stack engineer, 5+ years shipping scalable apps end to end.
+              I build AI-native — agents and LLMs in the workflow and in the
+              product, not bolted on after.
             </p>
 
             {/* Location & Availability */}
             <div className="flex flex-wrap gap-6 justify-center lg:justify-start mb-8 text-gray-300">
               <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-purple-400" />
+                <MapPin className="w-5 h-5 text-zinc-400" />
                 <span>DKI Jakarta</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-green-400" />
-                <span className="text-green-400">Available for hire</span>
+                <Calendar className="w-5 h-5 text-emerald-400" />
+                <span className="text-emerald-400">Available for hire</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="w-5 h-5 text-zinc-400" />
+                <span>Remote working preferred</span>
               </div>
             </div>
 
@@ -102,7 +105,7 @@ const _renderNavigationSection = (
               onClick={() => setActiveTab(tab)}
               className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeTab === tab
-                  ? "bg-purple-600 text-white shadow-lg"
+                  ? "bg-zinc-100 text-zinc-900 shadow-lg"
                   : "text-gray-300 hover:text-white hover:bg-gray-700/50"
               }`}
             >
@@ -134,10 +137,10 @@ const _renderContentSection = (activeTab: Tabs) => {
               {skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
+                  className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="text-purple-400">{skill.icon}</div>
+                    <div className="text-zinc-400">{skill.icon}</div>
                     <h4 className="text-xl font-semibold text-white">
                       {skill.category}
                     </h4>
@@ -146,7 +149,7 @@ const _renderContentSection = (activeTab: Tabs) => {
                     {skill.items.map((item, itemIndex) => (
                       <span
                         key={itemIndex}
-                        className="inline-block bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm mr-2 mb-2"
+                        className="inline-block bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm mr-2 mb-2"
                       >
                         {item}
                       </span>
@@ -176,7 +179,7 @@ const _renderContentSection = (activeTab: Tabs) => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105"
+                className="bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300 hover:transform hover:scale-105"
               >
                 <div className="h-48 overflow-hidden">
                   <Image
@@ -198,7 +201,7 @@ const _renderContentSection = (activeTab: Tabs) => {
                     {project.technologies.map((tech, index) => (
                       <span
                         key={index}
-                        className="bg-purple-600/20 text-purple-300 px-2 py-1 rounded text-xs"
+                        className="bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-2 py-1 rounded text-xs"
                       >
                         {tech}
                       </span>
@@ -215,7 +218,7 @@ const _renderContentSection = (activeTab: Tabs) => {
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
-                        className="flex items-center gap-2 bg-purple-600/50 hover:bg-purple-500/50 px-4 py-2 rounded-lg transition-colors"
+                        className="flex items-center gap-2 bg-zinc-100/15 hover:bg-zinc-100/25 px-4 py-2 rounded-lg transition-colors"
                       >
                         <ExternalLink className="w-4 h-4 text-white" />
                         <span className="text-white text-sm">Live</span>
@@ -238,14 +241,14 @@ const _renderContentSection = (activeTab: Tabs) => {
             {experience.map((exp) => (
               <div
                 key={exp.id}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
+                className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300"
               >
                 <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-4">
                   <div className="flex-1">
                     <h4 className="text-2xl font-bold text-white">
                       {exp.position}
                     </h4>
-                    <h5 className="text-xl text-purple-300 font-medium">
+                    <h5 className="text-xl text-zinc-400 font-medium">
                       {exp.company}
                     </h5>
                   </div>
@@ -260,7 +263,7 @@ const _renderContentSection = (activeTab: Tabs) => {
                   {exp.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm"
+                      className="bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm"
                     >
                       {tech}
                     </span>
@@ -307,7 +310,7 @@ const Portfolio: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tabs>("about");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#111827] to-[#475569]">
       {_renderHeaderSection()}
       {_renderNavigationSection(activeTab, setActiveTab)}
       {_renderContentSection(activeTab)}
