@@ -13,7 +13,15 @@ import {
 
 import assets from "../../assets";
 
-import { skills, projects, experience, aboutMe, socialLinks } from "./portfolio.config";
+import {
+  skills,
+  projects,
+  experience,
+  aboutMe,
+  socialLinks,
+  visibleTabs,
+} from "./portfolio.config";
+import { glassCard } from "./portfolio.styles";
 import { SetActiveTab, Tabs } from "./portfolio.types";
 
 /**
@@ -99,7 +107,7 @@ const _renderNavigationSection = (
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex justify-center mb-12">
         <div className="bg-gray-800/50 rounded-full p-1 backdrop-blur-sm">
-          {(["about", "projects", "experience"] as const).map((tab) => (
+          {visibleTabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -137,7 +145,7 @@ const _renderContentSection = (activeTab: Tabs) => {
               {skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300"
+                  className={`${glassCard} rounded-2xl p-6`}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="text-zinc-400">{skill.icon}</div>
@@ -161,7 +169,7 @@ const _renderContentSection = (activeTab: Tabs) => {
           </div>
 
           {/* Bio Section */}
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50">
+          <div className={`${glassCard} rounded-2xl p-8`}>
             <h3 className="text-3xl font-bold text-white mb-6">About Me</h3>
             <div className="text-gray-300 space-y-4 leading-relaxed">
               <p>{aboutMe}</p>
@@ -179,7 +187,7 @@ const _renderContentSection = (activeTab: Tabs) => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300 hover:transform hover:scale-105"
+                className={`${glassCard} rounded-2xl overflow-hidden hover:scale-[1.02]`}
               >
                 <div className="h-48 overflow-hidden">
                   <Image
@@ -241,9 +249,20 @@ const _renderContentSection = (activeTab: Tabs) => {
             {experience.map((exp) => (
               <div
                 key={exp.id}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50 hover:border-zinc-500/60 transition-all duration-300"
+                className={`${glassCard} rounded-2xl p-8`}
               >
                 <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-4">
+                  {exp.logo && (
+                    <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden bg-white/5 ring-1 ring-white/10">
+                      <Image
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
                   <div className="flex-1">
                     <h4 className="text-2xl font-bold text-white">
                       {exp.position}
@@ -259,6 +278,22 @@ const _renderContentSection = (activeTab: Tabs) => {
                 <p className="text-gray-300 mb-4 leading-relaxed">
                   {exp.description}
                 </p>
+                {exp.highlights && (
+                  <ul className="mb-6 space-y-2">
+                    {exp.highlights.map((highlight, highlightIndex) => (
+                      <li
+                        key={highlightIndex}
+                        className="flex gap-3 text-gray-300 leading-relaxed"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400"
+                        />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <div className="flex flex-wrap gap-2">
                   {exp.technologies.map((tech, techIndex) => (
                     <span

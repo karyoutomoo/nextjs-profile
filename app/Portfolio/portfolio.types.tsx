@@ -16,9 +16,13 @@ export interface Project {
 export interface Experience {
   id: number;
   company: string;
+  /** Path to the company/product logo under /public. */
+  logo?: string;
   position: string;
   duration: string;
   description: string;
+  /** Notable initiatives delivered in the role. */
+  highlights?: string[];
   technologies: string[];
 }
 

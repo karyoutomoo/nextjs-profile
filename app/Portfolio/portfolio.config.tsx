@@ -1,7 +1,7 @@
 import { Code, Database, Github, Mail, Linkedin, Server, Lamp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { Project, Experience, Skill } from "./portfolio.types";
+import { Project, Experience, Skill, Tabs } from "./portfolio.types";
 
 export const socialLinks: { name: string; url: string; icon: LucideIcon }[] = [
   {
@@ -87,10 +87,14 @@ export const projects: Project[] = [
   }
 ];
 
+/** Tabs rendered in the navigation. Drop a tab here to hide it without deleting its content. */
+export const visibleTabs: Tabs[] = ["about", "experience"];
+
 export const experience: Experience[] = [
   {
     id: 1,
     company: "Sociolla",
+    logo: "/logos/soco.png",
     position: "Full Stack Software Engineer (SDE III)",
     duration: "2026 - Present",
     description:
@@ -106,10 +110,18 @@ export const experience: Experience[] = [
   {
     id: 2,
     company: "Jenius SMBCI (Formerly BTPN)",
+    logo: "/logos/jenius.png",
     position: "Full Stack Software Engineer",
     duration: "2019 - 2026",
     description:
       "Develop and maintain customer-facing applications serving 10M+ users. Built scalable services to automate tasks and improve performance.",
+    highlights: [
+      "Priority Banking \u2014 built the wealth-tier experience for high-net-worth customers, including tier-gated features and dedicated servicing flows.",
+      "Mutual Funds \u2014 shipped in-app investment: fund discovery, risk profiling, subscription and redemption against custodian APIs.",
+      "BI-FAST \u2014 integrated Bank Indonesia\u2019s real-time retail payment rail, replacing legacy transfers with 24/7 instant settlement.",
+      "App UI Revamp \u2014 rebuilt the customer app\u2019s interface on a shared component library, cutting screen build time and unifying the design language.",
+      "VISA OTP \u2014 implemented 3-D Secure one-time-password verification for card transactions, hardening online payment authentication.",
+    ],
     technologies: [
       "React",
       "React Native",
@@ -122,6 +134,7 @@ export const experience: Experience[] = [
   {
     id: 3,
     company: "AkuPintar App",
+    logo: "/logos/akupintar.png",
     position: "Mobile Developer",
     duration: "2019",
     description:
@@ -131,6 +144,7 @@ export const experience: Experience[] = [
   {
     id: 4,
     company: "Blibli.com",
+    logo: "/logos/blibli.png",
     position: "Intern Backend Developer",
     duration: "2018",
     description:
