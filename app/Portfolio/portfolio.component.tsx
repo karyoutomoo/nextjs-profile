@@ -2,16 +2,15 @@
 
 import React, { useState } from "react";
 
+import dynamic from "next/dynamic";
+
 import Image from "next/image";
-import {
-  Github,
-  ExternalLink,
-  MapPin,
-  Calendar,
-  Globe,
-} from "lucide-react";
+import { Github, ExternalLink, MapPin, Calendar, Globe } from "lucide-react";
 
 import assets from "../../assets";
+
+/** WebGL touches window, so it must stay out of the static prerender. */
+const HeroBackdrop = dynamic(() => import("../HeroBackdrop"), { ssr: false });
 
 import {
   skills,
@@ -21,6 +20,8 @@ import {
   socialLinks,
   visibleTabs,
 } from "./portfolio.config";
+import Reveal from "../Reveal";
+
 import { glassCard } from "./portfolio.styles";
 import { SetActiveTab, Tabs } from "./portfolio.types";
 
@@ -30,6 +31,7 @@ import { SetActiveTab, Tabs } from "./portfolio.types";
 const _renderHeaderSection = () => {
   return (
     <div className="relative overflow-hidden">
+      <HeroBackdrop className="[mask-image:linear-gradient(to_bottom,black_60%,transparent)]" />
       <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent"></div>
       <div className="relative max-w-6xl mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -53,8 +55,8 @@ const _renderHeaderSection = () => {
               Full Stack Software Developer
             </h2>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              Full stack engineer, 5+ years shipping scalable apps end to end.
-              I build AI-native — agents and LLMs in the workflow and in the
+              Full stack engineer, 5+ years shipping scalable apps end to end. I
+              build AI-native — agents and LLMs in the workflow and in the
               product, not bolted on after.
             </p>
 
@@ -126,7 +128,7 @@ const _renderNavigationSection = (
   );
 };
 
-/** 
+/**
  * Renders the content section based on the active tab (About, Projects, Experience).
  * @param activeTab
  * @returns Content Component
@@ -143,38 +145,39 @@ const _renderContentSection = (activeTab: Tabs) => {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className={`${glassCard} rounded-2xl p-6`}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="text-zinc-400">{skill.icon}</div>
-                    <h4 className="text-xl font-semibold text-white">
-                      {skill.category}
-                    </h4>
+                <Reveal key={index} delay={index * 80} className="h-full">
+                  <div className={`${glassCard} h-full rounded-2xl p-6`}>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="text-zinc-400">{skill.icon}</div>
+                      <h4 className="text-xl font-semibold text-white">
+                        {skill.category}
+                      </h4>
+                    </div>
+                    <div className="space-y-2">
+                      {skill.items.map((item, itemIndex) => (
+                        <span
+                          key={itemIndex}
+                          className="inline-block bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm mr-2 mb-2"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    {skill.items.map((item, itemIndex) => (
-                      <span
-                        key={itemIndex}
-                        className="inline-block bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm mr-2 mb-2"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
 
           {/* Bio Section */}
-          <div className={`${glassCard} rounded-2xl p-8`}>
-            <h3 className="text-3xl font-bold text-white mb-6">About Me</h3>
-            <div className="text-gray-300 space-y-4 leading-relaxed">
-              <p>{aboutMe}</p>
+          <Reveal>
+            <div className={`${glassCard} rounded-2xl p-8`}>
+              <h3 className="text-3xl font-bold text-white mb-6">About Me</h3>
+              <div className="text-gray-300 space-y-4 leading-relaxed">
+                <p>{aboutMe}</p>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       )}
 
@@ -246,65 +249,64 @@ const _renderContentSection = (activeTab: Tabs) => {
             Work Experience
           </h3>
           <div className="space-y-6">
-            {experience.map((exp) => (
-              <div
-                key={exp.id}
-                className={`${glassCard} rounded-2xl p-8`}
-              >
-                <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-4">
-                  {exp.logo && (
-                    <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden bg-white/5 ring-1 ring-white/10">
-                      <Image
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        width={56}
-                        height={56}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1">
-                    <h4 className="text-2xl font-bold text-white">
-                      {exp.position}
-                    </h4>
-                    <h5 className="text-xl text-zinc-400 font-medium">
-                      {exp.company}
-                    </h5>
-                  </div>
-                  <div className="text-gray-400 font-medium">
-                    {exp.duration}
-                  </div>
-                </div>
-                <p className="text-gray-300 mb-4 leading-relaxed">
-                  {exp.description}
-                </p>
-                {exp.highlights && (
-                  <ul className="mb-6 space-y-2">
-                    {exp.highlights.map((highlight, highlightIndex) => (
-                      <li
-                        key={highlightIndex}
-                        className="flex gap-3 text-gray-300 leading-relaxed"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400"
+            {experience.map((exp, index) => (
+              <Reveal key={exp.id} delay={index * 80}>
+                <div className={`${glassCard} rounded-2xl p-8`}>
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-4">
+                    {exp.logo && (
+                      <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden bg-white/5 ring-1 ring-white/10">
+                        <Image
+                          src={exp.logo}
+                          alt={`${exp.company} logo`}
+                          width={56}
+                          height={56}
+                          className="w-full h-full object-contain"
                         />
-                        <span>{highlight}</span>
-                      </li>
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <h4 className="text-2xl font-bold text-white">
+                        {exp.position}
+                      </h4>
+                      <h5 className="text-xl text-zinc-400 font-medium">
+                        {exp.company}
+                      </h5>
+                    </div>
+                    <div className="text-gray-400 font-medium">
+                      {exp.duration}
+                    </div>
+                  </div>
+                  <p className="text-gray-300 mb-4 leading-relaxed">
+                    {exp.description}
+                  </p>
+                  {exp.highlights && (
+                    <ul className="mb-6 space-y-2">
+                      {exp.highlights.map((highlight, highlightIndex) => (
+                        <li
+                          key={highlightIndex}
+                          className="flex gap-3 text-gray-300 leading-relaxed"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400"
+                          />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
                     ))}
-                  </ul>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="bg-zinc-100/10 text-zinc-300 ring-1 ring-inset ring-white/10 px-3 py-1 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -313,7 +315,7 @@ const _renderContentSection = (activeTab: Tabs) => {
   );
 };
 
-/** 
+/**
  * Defines the fade-in animation for content transitions.
  * @returns Style animation
  */
@@ -338,7 +340,7 @@ const _showAnimation = () => {
   );
 };
 
-/** 
+/**
  * Main Portfolio component that manages state and renders header, navigation, and content sections.
  */
 const Portfolio: React.FC = () => {

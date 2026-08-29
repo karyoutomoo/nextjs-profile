@@ -1,4 +1,12 @@
-import { Code, Database, Github, Mail, Linkedin, Server, Lamp } from "lucide-react";
+import {
+  Code,
+  Database,
+  Github,
+  Mail,
+  Linkedin,
+  Server,
+  Lamp,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { Project, Experience, Skill, Tabs } from "./portfolio.types";
@@ -9,17 +17,17 @@ export const socialLinks: { name: string; url: string; icon: LucideIcon }[] = [
     url: "mailto:karyoutomoo@gmail.com",
     icon: Mail,
   },
-   {
+  {
     name: "GitHub",
     url: "https://github.com/karyoutomoo",
     icon: Github,
   },
-   {
+  {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/profilefaiq",
     icon: Linkedin,
-  }
-]
+  },
+];
 export const skills: Skill[] = [
   {
     category: "Frontend",
@@ -72,7 +80,8 @@ export const projects: Project[] = [
     technologies: ["React", "PostgreSQL", "Tailwind"],
     githubUrl: "https://github.com/karyoutomoo/nextjs-profile",
     liveUrl: "https://ecommerce-demo.com",
-    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=870&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=870&auto=format&fit=crop",
   },
   {
     id: 2,
@@ -84,7 +93,7 @@ export const projects: Project[] = [
     liveUrl: "https://taskmanager-demo.com",
     image:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop",
-  }
+  },
 ];
 
 /** Tabs rendered in the navigation. Drop a tab here to hide it without deleting its content. */

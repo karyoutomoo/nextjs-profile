@@ -1,7 +1,7 @@
 import React from "react";
 
 export type Tabs = "about" | "projects" | "experience";
-export type SetActiveTab =  React.Dispatch<React.SetStateAction<Tabs>>;
+export type SetActiveTab = React.Dispatch<React.SetStateAction<Tabs>>;
 
 export interface Project {
   id: number;
